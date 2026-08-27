@@ -1,0 +1,34 @@
+<noinclude>
+This is the "Package" form for creating and updating Parch Linux package entries.
+[[Category:Forms]]
+</noinclude>
+<includeonly>
+{{{info|edit title=Edit Package: <page name>|create title=Add New Parch Package}}}
+{{{for template|Package}}}
+{| class="formtable"
+! Package Name:
+| {{{field|PackageName|input type=text|mandatory}}}
+|-
+! Version:
+| {{{field|Version|input type=text}}}
+|-
+! Category:
+| {{{field|Category|input type=dropdown|values=Desktop Environment, Window Manager, Audio, Development, Driver, Kernel, Multimedia, Networking, System, Utility|default=Utility}}}
+|-
+! Repository:
+| {{{field|Repo|input type=dropdown|values=core, extra, multilib, parch-repo, aur|default=parch-repo}}}
+|-
+! Maintainer:
+| {{{field|Maintainer|input type=text|default=Parch Team}}}
+|-
+! Installation Command:
+| {{{field|InstallationCommand|input type=text|size=60}}}
+|-
+! Upstream URL:
+| {{{field|UpstreamURL|input type=text|size=60}}}
+|-
+! Description:
+| {{{field|Description|input type=textarea|rows=6|cols=80}}}
+|}
+{{{end template}}}
+</includeonly>

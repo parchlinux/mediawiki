@@ -1,0 +1,339 @@
+<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.11/"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.mediawiki.org/xml/export-0.11/ http://www.mediawiki.org/xml/export-0.11.xsd"
+           version="0.11" xml:lang="en">
+  <siteinfo>
+    <sitename>Parch Linux Wiki</sitename>
+    <dbname>parchwiki</dbname>
+    <base>https://wiki.parchlinux.com/wiki/Main_Page</base>
+    <generator>Parch Linux Bootstrap Generator</generator>
+    <case>first-letter</case>
+    <namespaces>
+      <namespace key="-2" case="first-letter">Media</namespace>
+      <namespace key="-1" case="first-letter">Special</namespace>
+      <namespace key="0" case="first-letter" />
+      <namespace key="1" case="first-letter">Talk</namespace>
+      <namespace key="2" case="first-letter">User</namespace>
+      <namespace key="3" case="first-letter">User talk</namespace>
+      <namespace key="4" case="first-letter">Project</namespace>
+      <namespace key="5" case="first-letter">Project talk</namespace>
+      <namespace key="6" case="first-letter">File</namespace>
+      <namespace key="7" case="first-letter">File talk</namespace>
+      <namespace key="8" case="first-letter">MediaWiki</namespace>
+      <namespace key="9" case="first-letter">MediaWiki talk</namespace>
+      <namespace key="10" case="first-letter">Template</namespace>
+      <namespace key="11" case="first-letter">Template talk</namespace>
+      <namespace key="14" case="first-letter">Category</namespace>
+      <namespace key="15" case="first-letter">Category talk</namespace>
+      <namespace key="106" case="first-letter">Form</namespace>
+      <namespace key="107" case="first-letter">Form talk</namespace>
+    </namespaces>
+  </siteinfo>
+
+  <!-- Main Page -->
+  <page>
+    <title>Main Page</title>
+    <ns>0</ns>
+    <id>1</id>
+    <revision>
+      <id>1</id>
+      <timestamp>2026-08-27T00:00:00Z</timestamp>
+      <contributor>
+        <username>ParchAdmin</username>
+        <id>1</id>
+      </contributor>
+      <comment>Parch Linux Wiki Welcome Page</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve">= Welcome to Parch Linux Wiki =
+
+Welcome to the official documentation and knowledge base for '''Parch Linux''' — an open-source, Arch-based operating system designed for simplicity, performance, and beauty.
+
+{{Tip|Explore the guides below to get started with installation, desktop environments, package management, and system administration.}}
+
+== 🚀 Getting Started ==
+* [[Installation Guide|Installing Parch Linux]]
+* [[Post Installation|Post-Installation Setup]]
+* [[Package Management|Pacman & Parch Repositories]]
+* [[Desktop Environments|Choosing a Desktop Environment]]
+
+== 💻 Hardware & Packages ==
+* [[Hardware Compatibility|Hardware Compatibility Matrix]]
+* [[Parch Packages|Official & Community Packages]]
+
+== 🌐 Community & Contributing ==
+* [https://parchlinux.com Official Website]
+* [https://github.com/parchlinux GitHub Repositories]
+* [[Contributing Guide|How to Contribute to the Wiki]]
+</text>
+    </revision>
+  </page>
+
+  <!-- MediaWiki:Citizen.css -->
+  <page>
+    <title>MediaWiki:Citizen.css</title>
+    <ns>8</ns>
+    <id>2</id>
+    <revision>
+      <id>2</id>
+      <timestamp>2026-08-27T00:00:00Z</timestamp>
+      <contributor><username>ParchAdmin</username><id>1</id></contributor>
+      <comment>Parch Linux Citizen Skin Tokens & CSS</comment>
+      <model>css</model>
+      <format>text/css</format>
+      <text xml:space="preserve">:root {
+    --color-primary: #16a085;
+    --color-primary--hover: #1abc9c;
+    --color-primary--active: #149174;
+    --color-primary__subtle: rgba(22, 160, 133, 0.15);
+    --font-family-monospace: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, Monaco, Consolas, monospace;
+}
+
+[data-theme="dark"] {
+    --color-surface-0: #14171d;
+    --color-surface-1: #1b2028;
+    --color-surface-2: #242b35;
+    --color-surface-3: #2e3744;
+    --color-primary: #1abc9c;
+    --color-primary--hover: #48c9b0;
+    --color-primary--active: #16a085;
+}
+
+.mw-highlight pre, pre, code {
+    font-family: var(--font-family-monospace) !important;
+    font-size: 0.9em;
+    border-radius: 6px;
+}
+</text>
+    </revision>
+  </page>
+
+  <!-- MediaWiki:Common.css -->
+  <page>
+    <title>MediaWiki:Common.css</title>
+    <ns>8</ns>
+    <id>3</id>
+    <revision>
+      <id>3</id>
+      <timestamp>2026-08-27T00:00:00Z</timestamp>
+      <contributor><username>ParchAdmin</username><id>1</id></contributor>
+      <comment>Parch Linux Global Callout & Component Styles</comment>
+      <model>css</model>
+      <format>text/css</format>
+      <text xml:space="preserve">.parch-callout {
+    border-left: 4px solid #16a085;
+    background-color: rgba(22, 160, 133, 0.12);
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+}
+.parch-callout-tip { border-left-color: #2ecc71; background-color: rgba(46, 204, 113, 0.12); }
+.parch-callout-warning { border-left-color: #e67e22; background-color: rgba(230, 126, 34, 0.12); }
+.parch-callout-danger { border-left-color: #e74c3c; background-color: rgba(231, 76, 60, 0.12); }
+.parch-callout-info { border-left-color: #3498db; background-color: rgba(52, 152, 219, 0.12); }
+</text>
+    </revision>
+  </page>
+
+  <!-- Template:Note -->
+  <page>
+    <title>Template:Note</title>
+    <ns>10</ns>
+    <id>4</id>
+    <revision>
+      <id>4</id>
+      <timestamp>2026-08-27T00:00:00Z</timestamp>
+      <contributor><username>ParchAdmin</username><id>1</id></contributor>
+      <comment>Parch Note Template</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve"><div class="parch-callout parch-callout-info" style="border-left: 4px solid #3498db; background-color: rgba(52, 152, 219, 0.12); padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
+<strong>ℹ️ Note:</strong>
+<div style="margin-top: 4px;">{{{1|{{{text|}}}}}}</div>
+</div><noinclude>
+[[Category:Templates]]
+</noinclude></text>
+    </revision>
+  </page>
+
+  <!-- Template:Tip -->
+  <page>
+    <title>Template:Tip</title>
+    <ns>10</ns>
+    <id>5</id>
+    <revision>
+      <id>5</id>
+      <timestamp>2026-08-27T00:00:00Z</timestamp>
+      <contributor><username>ParchAdmin</username><id>1</id></contributor>
+      <comment>Parch Tip Template</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve"><div class="parch-callout parch-callout-tip" style="border-left: 4px solid #2ecc71; background-color: rgba(46, 204, 113, 0.12); padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
+<strong>💡 Tip:</strong>
+<div style="margin-top: 4px;">{{{1|{{{text|}}}}}}</div>
+</div><noinclude>
+[[Category:Templates]]
+</noinclude></text>
+    </revision>
+  </page>
+
+  <!-- Template:Warning -->
+  <page>
+    <title>Template:Warning</title>
+    <ns>10</ns>
+    <id>6</id>
+    <revision>
+      <id>6</id>
+      <timestamp>2026-08-27T00:00:00Z</timestamp>
+      <contributor><username>ParchAdmin</username><id>1</id></contributor>
+      <comment>Parch Warning Template</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve"><div class="parch-callout parch-callout-warning" style="border-left: 4px solid #e67e22; background-color: rgba(230, 126, 34, 0.12); padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
+<strong>⚠️ Warning:</strong>
+<div style="margin-top: 4px;">{{{1|{{{text|}}}}}}</div>
+</div><noinclude>
+[[Category:Templates]]
+</noinclude></text>
+    </revision>
+  </page>
+
+  <!-- Template:Package -->
+  <page>
+    <title>Template:Package</title>
+    <ns>10</ns>
+    <id>7</id>
+    <revision>
+      <id>7</id>
+      <timestamp>2026-08-27T00:00:00Z</timestamp>
+      <contributor><username>ParchAdmin</username><id>1</id></contributor>
+      <comment>Parch Package Cargo Template</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve"><noinclude>
+{{#cargo_declare:
+_table=Packages
+|PackageName=String
+|Version=String
+|Category=String
+|Repo=String
+|Maintainer=String
+|InstallationCommand=Wikitext
+|Description=Wikitext
+|UpstreamURL=URL
+}}
+[[Category:Templates]]
+</noinclude>
+{{#cargo_store:
+_table=Packages
+|PackageName={{{PackageName|{{PAGENAME}}}}}
+|Version={{{Version|}}}
+|Category={{{Category|}}}
+|Repo={{{Repo|parch-repo}}}
+|Maintainer={{{Maintainer|}}}
+|InstallationCommand={{{InstallationCommand|}}}
+|Description={{{Description|}}}
+|UpstreamURL={{{UpstreamURL|}}}
+}}
+{| class="wikitable" style="float: right; margin-left: 1.5em; width: 300px; border-collapse: collapse; border: 1px solid #16a085;"
+|+ style="background-color: #16a085; color: #ffffff; font-weight: bold; padding: 8px; font-size: 1.1em;" | {{{PackageName|{{PAGENAME}}}}}
+|-
+! scope="row" style="width: 35%; background-color: rgba(22, 160, 133, 0.1);" | Version
+| {{{Version|N/A}}}
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | Repository
+| <code>{{{Repo|parch-repo}}}</code>
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | Category
+| {{{Category|General}}}
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | Maintainer
+| {{{Maintainer|Parch Team}}}
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | Install
+| <code>{{{InstallationCommand|sudo pacman -S {{{PackageName|{{PAGENAME}}}}}}}}</code>
+{{#if:{{{UpstreamURL|}}}|
+{{!}}-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" {{!}} Upstream
+{{!}} [{{{UpstreamURL}}} Website]
+}}
+|}
+{{#if:{{{Description|}}}|{{{Description}}}|}}
+[[Category:Packages]]
+[[Category:{{{Category|General}}}]]
+</text>
+    </revision>
+  </page>
+
+  <!-- Template:Hardware -->
+  <page>
+    <title>Template:Hardware</title>
+    <ns>10</ns>
+    <id>8</id>
+    <revision>
+      <id>8</id>
+      <timestamp>2026-08-27T00:00:00Z</timestamp>
+      <contributor><username>ParchAdmin</username><id>1</id></contributor>
+      <comment>Parch Hardware Cargo Template</comment>
+      <model>wikitext</model>
+      <format>text/x-wiki</format>
+      <text xml:space="preserve"><noinclude>
+{{#cargo_declare:
+_table=HardwareCompatibility
+|DeviceModel=String
+|Vendor=String
+|DeviceType=String
+|GPU_Driver=String
+|WiFi_Chipset=String
+|KernelVersion=String
+|Status=String
+|Notes=Wikitext
+}}
+[[Category:Templates]]
+</noinclude>
+{{#cargo_store:
+_table=HardwareCompatibility
+|DeviceModel={{{DeviceModel|{{PAGENAME}}}}}
+|Vendor={{{Vendor|}}}
+|DeviceType={{{DeviceType|Laptop}}}
+|GPU_Driver={{{GPU_Driver|}}}
+|WiFi_Chipset={{{WiFi_Chipset|}}}
+|KernelVersion={{{KernelVersion|}}}
+|Status={{{Status|Working}}}
+|Notes={{{Notes|}}}
+}}
+{| class="wikitable" style="float: right; margin-left: 1.5em; width: 320px; border: 1px solid #16a085;"
+|+ style="background-color: #16a085; color: #ffffff; font-weight: bold; padding: 8px;" | {{{DeviceModel|{{PAGENAME}}}}}
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | Vendor
+| {{{Vendor|Unknown}}}
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | Type
+| {{{DeviceType|Laptop}}}
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | Status
+| {{#switch:{{{Status|Working}}}
+  |Working=<span style="color: #27ae60; font-weight: bold;">✔ Working</span>
+  |Tweaks Required=<span style="color: #e67e22; font-weight: bold;">⚠ Tweaks Required</span>
+  |Broken=<span style="color: #c0392b; font-weight: bold;">✖ Broken</span>
+  |#default={{{Status|Working}}}
+}}
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | GPU Driver
+| {{{GPU_Driver|N/A}}}
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | Wi-Fi Chipset
+| {{{WiFi_Chipset|N/A}}}
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | Tested Kernel
+| {{{KernelVersion|Latest}}}
+|}
+=== Hardware Compatibility Notes ===
+{{{Notes|No special tweaks reported. Works out-of-the-box on Parch Linux.}}}
+
+[[Category:Hardware]]
+[[Category:Hardware/{{{DeviceType|Laptop}}}]]
+</text>
+    </revision>
+  </page>
+</mediawiki>

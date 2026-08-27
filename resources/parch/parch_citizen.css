@@ -1,0 +1,48 @@
+/**
+ * Parch Linux Theme Customizations for Citizen Skin & MediaWiki
+ */
+
+:root {
+    --color-primary: #16a085;
+    --color-primary--hover: #1abc9c;
+    --color-primary--active: #149174;
+    --color-primary__subtle: rgba(22, 160, 133, 0.15);
+    --font-family-monospace: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Menlo, Monaco, Consolas, monospace;
+}
+
+[data-theme="dark"] {
+    --color-surface-0: #14171d;
+    --color-surface-1: #1b2028;
+    --color-surface-2: #242b35;
+    --color-surface-3: #2e3744;
+    --color-primary: #1abc9c;
+    --color-primary--hover: #48c9b0;
+    --color-primary--active: #16a085;
+}
+
+/* Enhanced Code Blocks & Syntax Highlighting */
+.mw-highlight pre, pre, code {
+    font-family: var(--font-family-monospace) !important;
+    font-size: 0.9em;
+    border-radius: 6px;
+}
+
+/* Parch Callouts / Alerts */
+.parch-callout {
+    border-left: 4px solid var(--color-primary);
+    background-color: var(--color-primary__subtle);
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 0 8px 8px 0;
+}
+.parch-callout-tip { border-left-color: #2ecc71; background-color: rgba(46, 204, 113, 0.12); }
+.parch-callout-warning { border-left-color: #e67e22; background-color: rgba(230, 126, 34, 0.12); }
+.parch-callout-danger { border-left-color: #e74c3c; background-color: rgba(231, 76, 60, 0.12); }
+.parch-callout-info { border-left-color: #3498db; background-color: rgba(52, 152, 219, 0.12); }
+
+/* Distro Hardware & Package Infobox Table Styling */
+table.formtable th {
+    text-align: left;
+    padding: 8px 12px;
+    background: rgba(22, 160, 133, 0.08);
+}

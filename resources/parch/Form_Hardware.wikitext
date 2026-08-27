@@ -1,0 +1,34 @@
+<noinclude>
+This is the "Hardware" form for submitting hardware compatibility reports.
+[[Category:Forms]]
+</noinclude>
+<includeonly>
+{{{info|edit title=Edit Hardware Report: <page name>|create title=Add New Hardware Compatibility Report}}}
+{{{for template|Hardware}}}
+{| class="formtable"
+! Device / Motherboard Model:
+| {{{field|DeviceModel|input type=text|mandatory}}}
+|-
+! Vendor:
+| {{{field|Vendor|input type=text|mandatory}}}
+|-
+! Device Type:
+| {{{field|DeviceType|input type=dropdown|values=Laptop, Desktop, Motherboard, GPU, Wi-Fi Adapter, Bluetooth, Audio Interface, Peripheral|default=Laptop}}}
+|-
+! Status:
+| {{{field|Status|input type=dropdown|values=Working, Tweaks Required, Broken|default=Working}}}
+|-
+! GPU Driver:
+| {{{field|GPU_Driver|input type=text|placeholder=e.g. mesa, nvidia, amdgpu}}}
+|-
+! Wi-Fi Chipset / Driver:
+| {{{field|WiFi_Chipset|input type=text|placeholder=e.g. Intel AX210, Realtek RTL8821CE}}}
+|-
+! Tested Kernel:
+| {{{field|KernelVersion|input type=text|placeholder=e.g. Linux 6.10, Linux-zen}}}
+|-
+! Compatibility Notes & Tweaks:
+| {{{field|Notes|input type=textarea|rows=8|cols=80}}}
+|}
+{{{end template}}}
+</includeonly>

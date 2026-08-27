@@ -1,0 +1,6 @@
+<div class="parch-callout parch-callout-tip" style="border-left: 4px solid #2ecc71; background-color: rgba(46, 204, 113, 0.12); padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
+<strong>💡 Tip:</strong>
+<div style="margin-top: 4px;">{{{1|{{{text|}}}}}}</div>
+</div><noinclude>
+[[Category:Templates]]
+</noinclude>

@@ -1,0 +1,57 @@
+<noinclude>
+{{#cargo_declare:
+_table=HardwareCompatibility
+|DeviceModel=String
+|Vendor=String
+|DeviceType=String
+|GPU_Driver=String
+|WiFi_Chipset=String
+|KernelVersion=String
+|Status=String
+|Notes=Wikitext
+}}
+This is the Hardware template used to store hardware compatibility reports for Parch Linux.
+[[Category:Templates]]
+</noinclude>
+{{#cargo_store:
+_table=HardwareCompatibility
+|DeviceModel={{{DeviceModel|{{PAGENAME}}}}}
+|Vendor={{{Vendor|}}}
+|DeviceType={{{DeviceType|Laptop}}}
+|GPU_Driver={{{GPU_Driver|}}}
+|WiFi_Chipset={{{WiFi_Chipset|}}}
+|KernelVersion={{{KernelVersion|}}}
+|Status={{{Status|Working}}}
+|Notes={{{Notes|}}}
+}}
+{| class="wikitable" style="float: right; margin-left: 1.5em; width: 320px; border: 1px solid #16a085;"
+|+ style="background-color: #16a085; color: #ffffff; font-weight: bold; padding: 8px;" | {{{DeviceModel|{{PAGENAME}}}}}
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | Vendor
+| {{{Vendor|Unknown}}}
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | Type
+| {{{DeviceType|Laptop}}}
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | Status
+| {{#switch:{{{Status|Working}}}
+  |Working=<span style="color: #27ae60; font-weight: bold;">✔ Working</span>
+  |Tweaks Required=<span style="color: #e67e22; font-weight: bold;">⚠ Tweaks Required</span>
+  |Broken=<span style="color: #c0392b; font-weight: bold;">✖ Broken</span>
+  |#default={{{Status|Working}}}
+}}
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | GPU Driver
+| {{{GPU_Driver|N/A}}}
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | Wi-Fi Chipset
+| {{{WiFi_Chipset|N/A}}}
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | Tested Kernel
+| {{{KernelVersion|Latest}}}
+|}
+=== Hardware Compatibility Notes ===
+{{{Notes|No special tweaks reported. Works out-of-the-box on Parch Linux.}}}
+
+[[Category:Hardware]]
+[[Category:Hardware/{{{DeviceType|Laptop}}}]]

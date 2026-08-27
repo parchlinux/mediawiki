@@ -1,0 +1,52 @@
+<noinclude>
+{{#cargo_declare:
+_table=Packages
+|PackageName=String
+|Version=String
+|Category=String
+|Repo=String
+|Maintainer=String
+|InstallationCommand=Wikitext
+|Description=Wikitext
+|UpstreamURL=URL
+}}
+This is the Package template used to store structured information about Parch Linux packages and display the package infobox.
+[[Category:Templates]]
+</noinclude>
+{{#cargo_store:
+_table=Packages
+|PackageName={{{PackageName|{{PAGENAME}}}}}
+|Version={{{Version|}}}
+|Category={{{Category|}}}
+|Repo={{{Repo|parch-repo}}}
+|Maintainer={{{Maintainer|}}}
+|InstallationCommand={{{InstallationCommand|}}}
+|Description={{{Description|}}}
+|UpstreamURL={{{UpstreamURL|}}}
+}}
+{| class="wikitable" style="float: right; margin-left: 1.5em; width: 300px; border-collapse: collapse; border: 1px solid #16a085;"
+|+ style="background-color: #16a085; color: #ffffff; font-weight: bold; padding: 8px; font-size: 1.1em;" | {{{PackageName|{{PAGENAME}}}}}
+|-
+! scope="row" style="width: 35%; background-color: rgba(22, 160, 133, 0.1);" | Version
+| {{{Version|N/A}}}
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | Repository
+| <code>{{{Repo|parch-repo}}}</code>
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | Category
+| {{{Category|General}}}
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | Maintainer
+| {{{Maintainer|Parch Team}}}
+|-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" | Install
+| <code>{{{InstallationCommand|sudo pacman -S {{{PackageName|{{PAGENAME}}}}}}}}</code>
+{{#if:{{{UpstreamURL|}}}|
+{{!}}-
+! scope="row" style="background-color: rgba(22, 160, 133, 0.1);" {{!}} Upstream
+{{!}} [{{{UpstreamURL}}} Website]
+}}
+|}
+{{#if:{{{Description|}}}|{{{Description}}}|}}
+[[Category:Packages]]
+[[Category:{{{Category|General}}}]]

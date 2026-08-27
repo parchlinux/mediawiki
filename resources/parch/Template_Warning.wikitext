@@ -1,0 +1,6 @@
+<div class="parch-callout parch-callout-warning" style="border-left: 4px solid #e67e22; background-color: rgba(230, 126, 34, 0.12); padding: 12px 16px; margin: 16px 0; border-radius: 0 8px 8px 0;">
+<strong>⚠️ Warning:</strong>
+<div style="margin-top: 4px;">{{{1|{{{text|}}}}}}</div>
+</div><noinclude>
+[[Category:Templates]]
+</noinclude>

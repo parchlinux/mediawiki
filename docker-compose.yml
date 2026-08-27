@@ -1,54 +1,115 @@
-# Please see DEVELOPERS.md for help
-#
-# Contributions to this file are welcome, but please note that this file is
-# minimal by design, with the idea to make it easily extensible via
-# docker-compose.override.yml. For help with doing that, please see
-# DEVELOPERS.md
 services:
-  mediawiki:
-    image: docker-registry.wikimedia.org/dev/bookworm-php85-fpm:1.0.0
-    user: "${MW_DOCKER_UID}:${MW_DOCKER_GID}"
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: parchlinux/wiki:latest
+    container_name: parchwiki_app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_started
     volumes:
-      - ./:/var/www/html/w:cached
+      - wiki_images:/var/www/html/images
+      - wiki_cache:/var/www/html/cache
+      - ./conf.d:/var/www/html/conf.d:ro
     env_file:
-      - '.env'
+      - path: .env
+        required: false
     environment:
-      COMPOSER_CACHE_DIR: '/var/www/html/w/cache/composer'
-      MW_SERVER: 'http://localhost:${MW_DOCKER_PORT:-8080}'
-      MW_DOCKER_PORT: "${MW_DOCKER_PORT:-8080}"
-      MW_SCRIPT_PATH: '/w'
-      MW_DBPATH: '/var/www/html/w/cache/sqlite'
-      MW_DBTYPE: 'sqlite'
-      MW_LANG: 'en'
-      MW_USER: '${MEDIAWIKI_USER:-Admin}'
-      MW_PASS: '${MEDIAWIKI_PASSWORD:-dockerpass}'
-      MW_SITENAME: 'MediaWiki'
-      MW_LOG_DIR: /var/www/html/w/cache
-      HISTFILE: /var/www/html/w/cache/.bash_history
-      XDEBUG_CONFIG: '${XDEBUG_CONFIG}'
-      XDEBUG_ENABLE: '${XDEBUG_ENABLE:-true}'
-      XHPROF_ENABLE: '${XHPROF_ENABLE:-true}'
+      - MW_DB_SERVER=db
+      - MW_DB_PORT=3306
+      - MW_DB_NAME=${MW_DB_NAME:-parchwiki}
+      - MW_DB_USER=${MW_DB_USER:-wikiuser}
+      - MW_DB_PASSWORD=${MW_DB_PASSWORD:-wikipass}
+      - MW_REDIS_SERVER=cache:6379
+      - MW_SERVER=${MW_SERVER:-http://localhost}
+      - MW_SITENAME=${MW_SITENAME:-Parch Linux Wiki}
+      - MW_LANG=${MW_LANG:-en}
+      - WAIT_FOR_DB=true
+      - AUTO_UPDATE_DB=true
+    networks:
+      - wiki_net
 
-  mediawiki-web:
-    image: docker-registry.wikimedia.org/dev/bookworm-apache2:1.0.1-s3
-    user: "${MW_DOCKER_UID}:${MW_DOCKER_GID}"
+  web:
+    image: nginx:alpine
+    container_name: parchwiki_web
+    restart: unless-stopped
     ports:
-      - "${MW_DOCKER_PORT:-8080}:8080"
+      - "${MW_HTTP_PORT:-80}:80"
+      - "${MW_HTTPS_PORT:-443}:443"
+    depends_on:
+      - app
     volumes:
-      - ./:/var/www/html/w:cached
-    env_file:
-      - '.env'
-    environment:
-      MW_LOG_DIR: /var/www/html/w/cache
-      MW_DOCKER_PORT: "${MW_DOCKER_PORT:-8080}"
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - wiki_images:/var/www/html/images:ro
+    networks:
+      - wiki_net
 
-  mediawiki-jobrunner:
-    image: docker-registry.wikimedia.org/dev/bookworm-php85-jobrunner:1.0.0
-    user: "${MW_DOCKER_UID}:${MW_DOCKER_GID}"
-    volumes:
-      - ./:/var/www/html/w:cached
-    env_file:
-      - '.env'
+  db:
+    image: mariadb:10.11
+    container_name: parchwiki_db
+    restart: unless-stopped
     environment:
-      MW_LOG_DIR: /var/www/html/w/cache
-      MW_INSTALL_PATH: /var/www/html/w
+      - MYSQL_ROOT_PASSWORD=${MW_DB_ROOT_PASSWORD:-rootpass}
+      - MYSQL_DATABASE=${MW_DB_NAME:-parchwiki}
+      - MYSQL_USER=${MW_DB_USER:-wikiuser}
+      - MYSQL_PASSWORD=${MW_DB_PASSWORD:-wikipass}
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - wiki_net
+
+  cache:
+    image: redis:7-alpine
+    container_name: parchwiki_cache
+    restart: unless-stopped
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - redis_data:/data
+    networks:
+      - wiki_net
+
+  jobrunner:
+    image: parchlinux/wiki:latest
+    container_name: parchwiki_jobrunner
+    restart: unless-stopped
+    depends_on:
+      - app
+      - cache
+      - db
+    volumes:
+      - wiki_images:/var/www/html/images
+      - wiki_cache:/var/www/html/cache
+      - ./conf.d:/var/www/html/conf.d:ro
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      - MW_DB_SERVER=db
+      - MW_DB_NAME=${MW_DB_NAME:-parchwiki}
+      - MW_DB_USER=${MW_DB_USER:-wikiuser}
+      - MW_DB_PASSWORD=${MW_DB_PASSWORD:-wikipass}
+      - MW_REDIS_SERVER=cache:6379
+      - WAIT_FOR_DB=true
+      - AUTO_UPDATE_DB=false
+    entrypoint: ["php", "/var/www/html/maintenance/runJobs.php", "--wait"]
+    networks:
+      - wiki_net
+
+volumes:
+  wiki_images:
+  wiki_cache:
+  db_data:
+  redis_data:
+
+networks:
+  wiki_net:
+    driver: bridge
