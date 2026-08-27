@@ -17,6 +17,12 @@ MW_LANG="${MW_LANG:-en}"
 
 echo "==> Starting Parch Linux MediaWiki container initialization..."
 
+# Ensure core vendor dependencies exist (handles volume overrides)
+if [ ! -f "${MW_INSTALL_PATH}/vendor/autoload.php" ] && [ -f "${MW_INSTALL_PATH}/composer.json" ]; then
+    echo "--> Installing missing Composer dependencies..."
+    composer install --no-dev --optimize-autoloader --no-interaction --working-dir="${MW_INSTALL_PATH}" || true
+fi
+
 # Ensure persistent directories exist and have proper permissions
 mkdir -p "${MW_INSTALL_PATH}/images" "${MW_INSTALL_PATH}/cache"
 if [ "$(id -u)" = "0" ]; then
@@ -40,12 +46,34 @@ if [ "${WAIT_FOR_DB:-true}" = "true" ] && [ -n "${MW_DB_SERVER}" ] && [ "${MW_DB
     echo "--> Database server is accessible."
 fi
 
-# Run database setup or schema update if requested
+# Check database schema state and auto-initialize if clean
 if [ "${AUTO_UPDATE_DB:-true}" = "true" ] && [ -f "${MW_INSTALL_PATH}/maintenance/run.php" ]; then
+    HAS_TABLES=false
+    if command -v mariadb >/dev/null 2>&1; then
+        TABLE_CHECK=$(mariadb -h "${MW_DB_SERVER}" -P "${MW_DB_PORT}" -u "${MW_DB_USER}" -p"${MW_DB_PASSWORD}" "${MW_DB_NAME}" -e "SHOW TABLES LIKE 'site_stats';" -N 2>/dev/null || true)
+        if [ -n "${TABLE_CHECK}" ]; then
+            HAS_TABLES=true
+        fi
+    fi
+
+    if [ "${HAS_TABLES}" = "false" ]; then
+        echo "--> Clean database detected. Running initial MediaWiki installer..."
+        php "${MW_INSTALL_PATH}/maintenance/run.php" install.php \
+            --dbserver="${MW_DB_SERVER}" \
+            --dbport="${MW_DB_PORT}" \
+            --dbname="${MW_DB_NAME}" \
+            --dbuser="${MW_DB_USER}" \
+            --dbpass="${MW_DB_PASSWORD}" \
+            --server="${MW_SERVER}" \
+            --scriptpath="${MW_SCRIPT_PATH:-}" \
+            --lang="${MW_LANG}" \
+            --pass="${MW_ADMIN_PASSWORD}" \
+            --confpath="/tmp" \
+            "${MW_SITENAME}" "${MW_ADMIN_USER}" || true
+    fi
+
     echo "--> Checking and applying database schema updates..."
-    php "${MW_INSTALL_PATH}/maintenance/run.php" update.php --quick || {
-        echo "--> Schema update exited with notice. If this is a clean database, please run installer."
-    }
+    php "${MW_INSTALL_PATH}/maintenance/run.php" update.php --quick || true
 fi
 
 echo "==> MediaWiki ready. Executing command: $@"

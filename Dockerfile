@@ -98,6 +98,9 @@ WORKDIR ${MW_INSTALL_PATH}
 # Copy MediaWiki core codebase
 COPY . ${MW_INSTALL_PATH}/
 
+# Install core composer dependencies
+RUN composer install --no-dev --optimize-autoloader --no-interaction
+
 # Copy helper and entrypoint scripts
 COPY docker/install-extensions.sh /usr/local/bin/install-extensions.sh
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
