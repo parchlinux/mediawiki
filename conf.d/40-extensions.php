@@ -60,6 +60,7 @@ wfLoadExtensionIfExists( 'AdvancedSearch' );
 // -----------------------------------------------------------------------------
 // 4. Community & Collaboration
 // -----------------------------------------------------------------------------
+wfLoadExtensionIfExists( 'Linter' );
 wfLoadExtensionIfExists( 'DiscussionTools' );
 wfLoadExtensionIfExists( 'Echo' );
 

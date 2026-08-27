@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: parchlinux/wiki:latest
+    image: ghcr.io/parchlinux/mediawiki:latest
     container_name: parchwiki_app
     restart: unless-stopped
     depends_on:
@@ -79,7 +79,7 @@ services:
       - wiki_net
 
   jobrunner:
-    image: parchlinux/wiki:latest
+    image: ghcr.io/parchlinux/mediawiki:latest
     container_name: parchwiki_jobrunner
     restart: unless-stopped
     depends_on:

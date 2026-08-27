@@ -26,6 +26,7 @@ WIKIMEDIA_EXTENSIONS=(
     "TemplateStyles"
     "Cargo"
     "PageForms"
+    "Linter"
     "DiscussionTools"
     "Echo"
     "Cite"
