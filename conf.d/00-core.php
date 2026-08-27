@@ -17,6 +17,10 @@ $wgScriptPath = getenv( 'MW_SCRIPT_PATH' ) ?: '';
 $wgArticlePath = '/wiki/$1';
 $wgUsePathInfo = true;
 
+// Debugging & Exception details
+$wgShowExceptionDetails = true;
+$wgShowDBErrorBacktrace = true;
+
 // Email & Notification Configuration
 $wgEmergencyContact = getenv( 'MW_EMERGENCY_CONTACT' ) ?: 'admin@parchlinux.com';
 $wgPasswordSender = getenv( 'MW_PASSWORD_SENDER' ) ?: 'wiki@parchlinux.com';
@@ -46,8 +50,8 @@ $wgMaxImageArea = 1.25e7;
 $wgSVGConverter = 'rsvg';
 $wgSVGConverters['rsvg'] = '$path/rsvg-convert -w $width -h $height $input -o $output';
 $wgFileExtensions = array_unique( array_merge(
-    $wgFileExtensions,
-    [ 'png', 'gif', 'jpg', 'jpeg', 'webp', 'svg', 'ico', 'pdf', 'gz', 'tar', 'xz', 'zip', 'patch', 'diff' ]
+    isset( $wgFileExtensions ) && is_array( $wgFileExtensions ) ? $wgFileExtensions : [ 'png', 'gif', 'jpg', 'jpeg', 'webp' ],
+    [ 'svg', 'ico', 'pdf', 'gz', 'tar', 'xz', 'zip', 'patch', 'diff' ]
 ) );
 
 // Licensing

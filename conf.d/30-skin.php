@@ -17,8 +17,8 @@ if ( wfLoadSkinIfExists( 'Citizen' ) ) {
     $wgCitizenSearchGateway = 'mwActionApi';
 
     // Parch theme design tokens injected into page head
-    $wgHooks['BeforePageDisplay'][] = function ( OutputPage $out, Skin $skin ) {
-        if ( $skin->getSkinName() === 'citizen' ) {
+    $wgHooks['BeforePageDisplay'][] = function ( $out, $skin ) {
+        if ( is_object( $skin ) && method_exists( $skin, 'getSkinName' ) && strtolower( $skin->getSkinName() ) === 'citizen' ) {
             $customCss = <<<CSS
 :root {
     --color-primary: #16a085;
@@ -58,7 +58,9 @@ if ( wfLoadSkinIfExists( 'Citizen' ) ) {
 .parch-callout-danger { border-left-color: #e74c3c; background-color: rgba(231, 76, 60, 0.12); }
 .parch-callout-info { border-left-color: #3498db; background-color: rgba(52, 152, 219, 0.12); }
 CSS;
-            $out->addInlineStyle( $customCss );
+            if ( is_object( $out ) && method_exists( $out, 'addInlineStyle' ) ) {
+                $out->addInlineStyle( $customCss );
+            }
         }
     };
 } else {
