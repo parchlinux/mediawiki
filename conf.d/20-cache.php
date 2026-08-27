@@ -1,6 +1,6 @@
 <?php
 /**
- * 20-cache.php: Redis object cache, APCu acceleration, session storage, and job queue
+ * 20-cache.php: Redis object cache, APCu acceleration, and session storage
  */
 
 if ( !defined( 'MEDIAWIKI' ) ) {
@@ -25,15 +25,6 @@ if ( $redisServer ) {
     $wgMessageCacheType = 'redis';
     $wgParserCacheType = 'redis';
     $wgSessionCacheType = 'redis';
-
-    // Configure Job Queue to use Redis for asynchronous high throughput
-    $wgJobTypeConf['default'] = [
-        'class' => 'JobQueueRedis',
-        'redisServer' => $redisServer,
-        'redisConfig' => $redisPassword ? [ 'password' => $redisPassword ] : [],
-        'claimTTL' => 3600,
-        'maxConcurrency' => 10,
-    ];
 } else {
     // Fallback to APCu or local caching
     if ( extension_loaded( 'apcu' ) && ini_get( 'apc.enabled' ) ) {

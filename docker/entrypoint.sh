@@ -58,6 +58,10 @@ if [ "${AUTO_UPDATE_DB:-true}" = "true" ] && [ -f "${MW_INSTALL_PATH}/maintenanc
 
     if [ "${HAS_TABLES}" = "false" ]; then
         echo "--> Clean database detected. Running initial MediaWiki installer..."
+        if [ -f "${MW_INSTALL_PATH}/LocalSettings.php" ]; then
+            mv "${MW_INSTALL_PATH}/LocalSettings.php" "${MW_INSTALL_PATH}/LocalSettings.php.tmp"
+        fi
+
         php "${MW_INSTALL_PATH}/maintenance/run.php" install.php \
             --dbserver="${MW_DB_SERVER}" \
             --dbport="${MW_DB_PORT}" \
@@ -70,6 +74,10 @@ if [ "${AUTO_UPDATE_DB:-true}" = "true" ] && [ -f "${MW_INSTALL_PATH}/maintenanc
             --pass="${MW_ADMIN_PASSWORD}" \
             --confpath="/tmp" \
             "${MW_SITENAME}" "${MW_ADMIN_USER}" || true
+
+        if [ -f "${MW_INSTALL_PATH}/LocalSettings.php.tmp" ]; then
+            mv "${MW_INSTALL_PATH}/LocalSettings.php.tmp" "${MW_INSTALL_PATH}/LocalSettings.php"
+        fi
     fi
 
     echo "--> Checking and applying database schema updates..."
