@@ -61,11 +61,12 @@ if [ ! -d "${EXT_DIR}/TabberNeue" ]; then
     git clone --depth 1 https://gerrit.wikimedia.org/r/mediawiki/extensions/TabberNeue.git "${EXT_DIR}/TabberNeue" 2>/dev/null || true
 fi
 
-# Run composer install for extensions requiring composer dependencies (like Scribunto, Translate, etc.)
-for ext in "Scribunto" "Translate"; do
-    if [ -f "${EXT_DIR}/${ext}/composer.json" ]; then
-        echo "--> Running composer install in ${EXT_DIR}/${ext}..."
-        (cd "${EXT_DIR}/${ext}" && composer install --no-dev --optimize-autoloader --no-interaction) || true
+# Run composer install for all extensions and skins that declare a composer.json
+for composer_file in "${EXT_DIR}"/*/composer.json "${SKIN_DIR}"/*/composer.json; do
+    if [ -f "${composer_file}" ]; then
+        dir="$(dirname "${composer_file}")"
+        echo "--> Running composer install in ${dir}..."
+        (cd "${dir}" && composer install --no-dev --optimize-autoloader --no-interaction) || true
     fi
 done
 

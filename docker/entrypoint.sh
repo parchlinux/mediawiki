@@ -23,6 +23,17 @@ if [ ! -f "${MW_INSTALL_PATH}/vendor/autoload.php" ] && [ -f "${MW_INSTALL_PATH}
     composer install --no-dev --optimize-autoloader --no-interaction --working-dir="${MW_INSTALL_PATH}" || true
 fi
 
+# Ensure extension composer dependencies exist
+for composer_file in "${MW_INSTALL_PATH}/extensions"/*/composer.json "${MW_INSTALL_PATH}/skins"/*/composer.json; do
+    if [ -f "${composer_file}" ]; then
+        dir="$(dirname "${composer_file}")"
+        if [ ! -f "${dir}/vendor/autoload.php" ]; then
+            echo "--> Installing missing extension dependencies for $(basename "${dir}")..."
+            (cd "${dir}" && composer install --no-dev --optimize-autoloader --no-interaction) || true
+        fi
+    fi
+done
+
 # Ensure persistent directories exist and have proper permissions
 mkdir -p "${MW_INSTALL_PATH}/images" "${MW_INSTALL_PATH}/cache"
 if [ "$(id -u)" = "0" ]; then
